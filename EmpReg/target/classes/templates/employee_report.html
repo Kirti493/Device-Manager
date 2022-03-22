@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+	integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
+	integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>SEARCH</title>
+
+<style>
+header {
+	background-color: #fff;
+	height: 80px;
+	box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.15);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1;
+}
+
+header .container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 100%;
+}
+
+.container {
+	max-width: 1395px;
+	margin: auto;
+	padding: 0 16px;
+	color: #0a59b3;
+	font-size: 27px;
+}
+
+.container a {
+	text-decoration: none;
+}
+
+h2 {
+	margin-top: 125px;
+}
+
+.btn-info {
+	color: white;
+	background-color: #728672;
+	border-color: #728672;
+	height: 42px;
+	font-size: 17px;
+	font-weight: bold;
+}
+
+.search input[type="text"] {
+	margin-left: 130px;
+	height: 40px;
+	margin-top: 10px;
+	margin-bottom: 24px;
+}
+
+.table {
+	/* width: 464px !important; */
+	margin-left: 130px;
+	margin-right: 50px !important;
+	width: 80%;
+}
+
+.table th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #728672;
+	color: white;
+	text-align:center;
+}
+
+.table tr{
+	text-align:center;
+}
+.table tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+.table tr:hover {
+	background-color: #ddd;
+}
+
+body {
+	background-color: #d5f5da;
+	font-family: "Heebo", sans-serif;
+}
+
+#home {
+	border: 2px solid #989898;
+	padding: 5px;
+	border-radius: 7px;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+#home:hover {
+	background: #728672 !important;
+	color: white !important;
+}
+</style>
+
+</head>
+<header>
+	<div class="container">
+		<section class="logo">
+			<a href="home"> <strong>Device Management</strong>
+			</a>
+		</section>
+		<nav>
+			<a href="home" id="home">Home</a>
+		</nav>
+	</div>
+</header>
+<body>
+	<div class="search mt-5">
+		<h2 align="center">Employee Details</h2>
+		<br>
+		<form th:action="@{/empsearch}" method="get">
+			<input type="text" name="keyword" th:value="${keyword}"
+				placeholder="Search by employee name or employee id" size="50">
+			<button type="submit" class="btn btn-info">Search</button>
+			<button type="submit" class="btn btn-info">Reset</button>
+		</form>
+		<table class="table table-bordered table-sm mt-2">
+			<thead>
+				<tr>
+					<th>Serial No</th>
+					<th>Employee ID</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Designation</th>
+					<th>Email</th>
+					<th>Address</th>
+					<th>Contact No</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="l : ${list}" th:field="${l}">
+					<td th:text="${lStat.index+1}"></td>
+					<td th:text="${l.empid}"></td>
+					<td th:text="${l.firstName}"></td>
+					<td th:text="${l.lastName}"></td>
+					<td th:text="${l.designation}"></td>
+					<td th:text="${l.email}"></td>
+					<td th:text="${l.address}"></td>
+					<td th:text="${l.contactNo}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
